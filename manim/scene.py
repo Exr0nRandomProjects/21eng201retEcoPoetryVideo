@@ -67,11 +67,13 @@ class textTest(Scene):
 
             # create the base
             if len(keystones) > 0:
+            # if len(keyobjs) > 0:
                 anims = [ obj[1] for obj in keyobjs ]
                 keyobj = anims[0]
             else:
                 anims = [Text("e", color=BLUE)]
                 keyobj = anims[0]
+                keystones = [-1]
                 # x shift
                 if keyopt[0] is None:
                     keyobj.to_edge(LEFT)
@@ -82,19 +84,56 @@ class textTest(Scene):
                     anims[0].shift([0, CHAR_HEIGHT*keyopt[1], 0])
 
             last = False
-            for val, toshift in zip(line, yoffset):
-                print(val, toshift)
-                if val is None:
-                    anims.append(keyobj)
-                else:
-                    anims.append(Text(val[3], color=WHITE)
-                            .next_to(anims[-1], RIGHT, buff=KEARN_GAP)
-                            .align_to(keyobj, DOWN)
-                            .shift([0, -COMMA_HEIGHT*toshift, 0])
-                            )
-                    onscreen.append([val[2], anims[-1]])
-                    if type(val[-1]) != str:
-                        keyobjs.append(anims[-1])
+            if keystones[0] < 0:
+                before_key = []
+            else:
+                before_key = list(zip(line, yoffset))[:keystones[0]]
+
+            after_key  = list(zip(line, yoffset))[keystones[0]+1:]
+
+
+            print('pre',keyobj)
+            for val, toshift in reversed(before_key):
+                anims.insert(0, Text(val[3], color=WHITE)
+                        .next_to(anims[0], LEFT, buff=KEARN_GAP)
+                        .align_to(keyobj, DOWN)
+                        .shift([0, -COMMA_HEIGHT*toshift, 0])
+                        )
+                onscreen.insert(0, [val[2], anims[0]])
+                if type(val[-1]) != str:
+                    keyobjs.insert(0, anims[0])
+
+            # print(len(anims), keystones[0]+1)
+            anims.append(keyobj)
+            if keystones[0] < 0: anims.pop(0)
+
+            print('post',keyobj)
+
+            for val, toshift in after_key:
+                anims.append(Text(val[3], color=WHITE)
+                        .next_to(anims[-1], RIGHT, buff=KEARN_GAP)
+                        .align_to(keyobj, DOWN)
+                        .shift([0, -COMMA_HEIGHT*toshift, 0])
+                        )
+                onscreen.append([val[2], anims[-1]])
+                if type(val[-1]) != str:
+                    keyobjs.append(anims[-1])
+
+            anims.pop(keystones[0]+1)
+
+            # for val, toshift in zip(line, yoffset):
+            #     print(val, toshift)
+            #     if val is None:
+            #         anims.append(keyobj)
+            #     else:
+            #         anims.append(Text(val[3], color=WHITE)
+            #                 .next_to(anims[-1], RIGHT, buff=KEARN_GAP)
+            #                 .align_to(keyobj, DOWN)
+            #                 .shift([0, -COMMA_HEIGHT*toshift, 0])
+            #                 )
+            #         onscreen.append([val[2], anims[-1]])
+            #         if type(val[-1]) != str:
+            #             keyobjs.append(anims[-1])
 
             for i,anim in enumerate(anims):
                 if i in keystones: continue
