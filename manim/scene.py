@@ -1,29 +1,10 @@
 from manim import *
 
 POEM = [
-#     \/ xpos
-#            \/ y shift
-#                  \/ begin timestamp
-#                        \/ duration, None = (until next - 0.5)
-#                              \/ onscreen length (number of lines remaining to stay onscreen)
-#                                  \/ text
-# [
-#     ( None,  0.5,  1.00, None, 0, "In the beginning," ),
-#     ( None,  0.5,  3.00, None, 0, "it was" ),
-#     ( None,  0.5,  5.00, None, 0, "chaotic." ),
-#     ( None, -0.5,  7.00, None, 0, "A stew" ),
-#     ( None, -0.5,  8.00, None, 1, "almost" ),
-#     ( None, -0.5,  9.00, None, 0, "conscious." ),
-# ],
-# [
-#     ( None,  0.5,  1.00, None, 0, "Perception," ),
-#     ( None,  0.5,  3.00, None, 0, "only of the present." ),
-#     ( None, -0.5,  7.00, None, 0, "An ape" ),
-#     None,
-#     ( None, -0.5,  9.00, None, 0, "human." ),
-# ],
-#         ]
-
+#       \/ begin timestamp
+#             \/ duration, None = (until next - 0.5)
+#                   \/ onscreen length (number of lines remaining to stay onscreen)
+#                       \/ text
 [ ( None, 0.5 ), [
     (   1.00, None, 1, "In the beginning," ),
     (   3.00, None, 1, "it was" ),
@@ -67,9 +48,7 @@ class textTest(Scene):
 
             # create the base
             if len(keystones) > 0:
-            # if len(keyobjs) > 0:
                 anims = [ obj for obj in keyobjs ]
-                print('anims', anims)
                 keyobj = anims[0]
             else:
                 anims = [Text("e", color=BLUE)]
@@ -83,18 +62,15 @@ class textTest(Scene):
                 # y shift
                 if keyopt[1] is not None:
                     anims[0].shift([0, CHAR_HEIGHT*keyopt[1], 0])
-            print(keyobj)
 
-            last = False
+            # partition
             if keystones[0] < 0:
                 before_key = []
             else:
                 before_key = list(zip(line, yoffset))[:keystones[0]]
-
             after_key  = list(zip(line, yoffset))[keystones[0]+1:]
 
-
-            print('pre',keyobj)
+            # construct
             for val, toshift in reversed(before_key):
                 anims.insert(0, Text(val[3], color=WHITE)
                         .next_to(anims[0], LEFT, buff=KEARN_GAP)
@@ -102,17 +78,10 @@ class textTest(Scene):
                         .shift([0, -COMMA_HEIGHT*toshift, 0]))
                 onscreen.insert(0, [val[2], anims[0]])
                 if type(val[-1]) != str:
-                    # keyobjs.insert(0, Text(val[3], color=WHITE)
-                    #     .next_to(anims[1], LEFT, buff=KEARN_GAP)
-                    #     .align_to(keyobj, DOWN)
-                    #     .shift([0, -COMMA_HEIGHT*toshift, 0]))
                     keyobjs.insert(0, anims[0])
 
-            # print(len(anims), keystones[0]+1)
             anims.append(keyobj)
             if keystones[0] < 0: anims.pop(0)
-
-            print('post',keyobj)
 
             for val, toshift in after_key:
                 anims.append(Text(val[3], color=WHITE)
@@ -122,24 +91,15 @@ class textTest(Scene):
                         )
                 onscreen.append([val[2], anims[-1]])
                 if type(val[-1]) != str:
-                    # keyobjs.append(Text(val[3], color=WHITE)
-                    #     .next_to(anims[-2], RIGHT, buff=KEARN_GAP)
-                    #     .align_to(keyobj, DOWN)
-                    #     .shift([0, -COMMA_HEIGHT*toshift, 0]))
                     keyobjs.append(anims[-1])
 
             anims.pop(keystones[0]+1)
-
-            print(anims)
 
             for i,anim in enumerate(anims):
                 if i in keystones: continue
                 self.play(Create(anim))
 
-            self.wait(1)
-
-            print('keyobjs', keyobjs)
-
+            # draw
             for obj in onscreen:
                 obj[0] -= 1
             try:
@@ -147,5 +107,4 @@ class textTest(Scene):
             except ValueError:
                 pass
             onscreen = [ obj for obj in onscreen if obj[0] >= 0 ]
-
 
