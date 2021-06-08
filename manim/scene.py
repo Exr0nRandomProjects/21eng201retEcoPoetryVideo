@@ -12,17 +12,25 @@ POEM = [
 ]],
 [ ( None, -0.5 ), [
     (   7.00, None, 0, "A stew" ),
-    (   8.00, None, 2, "almost", True ),
+    (   8.00, None, 4, "almost", True ),
     (   9.00, None, 0, "conscious." ),
 ]],
 [ ( None, 0.5 ), [
-    (   1.00, None, 1, "Perception," ),
-    (   3.00, None, 1, "only of the present." ),
+    (   10.50, None, 1, "Perception," ),
+    (   12.00, None, 1, "only of the present." ),
 ]],
 [ ( None, -0.5 ), [
-    (   7.00, None, 0, "An ape" ),
+    (   15.00, None, 0, "An ape" ),
     None,
-    (   9.00, None, 0, "human." ),
+    (   17.00, None, 0, "human." ),
+]],
+[ ( None, 0.5 ), [
+    (  18.50, None, 1, "But from the shifting nature came" ),
+]],
+[ ( None, -0.5 ), [
+    (   23.00, None, 0, "A mind" ),
+    None,
+    (   25.00, None, 0, "dauntless." ),
 ]],
 ]
 
@@ -31,15 +39,19 @@ CHAR_HEIGHT = 0.8
 COMMA_HEIGHT = 0.12
 
 def is_shifted(s):
-    for char in ',;yp':
+    for char in ',;yqpjg':
         if char in s:
             return True
     return False
+
+def default_dura(s):
+    return len(s)/6
 
 class textTest(Scene):
     def construct(self):
         onscreen = []
         keyobjs = []
+        tot_dura = 0
 
         for keyopt, line in POEM:
             # calculate edge cases
@@ -70,18 +82,24 @@ class textTest(Scene):
                 before_key = list(zip(line, yoffset))[:keystones[0]]
             after_key  = list(zip(line, yoffset))[keystones[0]+1:]
 
+            print(before_key, after_key)
+
+            durations = []
+            start_times = []
+
             # construct
             for val, toshift in reversed(before_key):
                 anims.insert(0, Text(val[3], color=WHITE)
                         .next_to(anims[0], LEFT, buff=KEARN_GAP)
                         .align_to(keyobj, DOWN)
                         .shift([0, -COMMA_HEIGHT*toshift, 0]))
+                durations.append(val[1] or default_dura(val[3]))
+                start_times.append(val[0])
                 onscreen.insert(0, [val[2], anims[0]])
                 if type(val[-1]) != str:
                     keyobjs.insert(0, anims[0])
 
-            anims.append(keyobj)
-            if keystones[0] < 0: anims.pop(0)
+            print('anims', anims)
 
             for val, toshift in after_key:
                 anims.append(Text(val[3], color=WHITE)
@@ -89,22 +107,39 @@ class textTest(Scene):
                         .align_to(keyobj, DOWN)
                         .shift([0, -COMMA_HEIGHT*toshift, 0])
                         )
+                durations.append(val[1] or default_dura(val[3]))
+                start_times.append(val[0])
                 onscreen.append([val[2], anims[-1]])
                 if type(val[-1]) != str:
                     keyobjs.append(anims[-1])
 
+            self.remove(keystones[0]+1)
             anims.pop(keystones[0]+1)
 
+            print(durations)
+
+            sub = 0
             for i,anim in enumerate(anims):
-                if i in keystones: continue
-                self.play(Create(anim))
+                if i in keystones:
+                    sub += 1
+                    continue
+                to_wait = max(start_times[i-sub]-tot_dura, 0)
+                self.wait(to_wait)
+                tot_dura += to_wait
+                # self.play(Create(anim, run_time=durations[i-sub]))
+                self.play(Write(anim, run_time=2))
+                tot_dura += durations[i-sub]
 
             # draw
             for obj in onscreen:
                 obj[0] -= 1
             try:
-                self.play(*[ FadeOut(obj[1]) for obj in onscreen if obj[0] < 0 ])
+                to_rem = [ FadeOut(obj[1]) for obj in onscreen if obj[0] < 0 ]
+                self.play(*to_rem)
+                self.remove(*to_rem)
+                tot_dura += 1
             except ValueError:
                 pass
             onscreen = [ obj for obj in onscreen if obj[0] >= 0 ]
+        print('TOTAL DURATION:', tot_dura)
 
