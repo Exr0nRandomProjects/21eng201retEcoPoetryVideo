@@ -113,22 +113,18 @@ class textTest(Scene):
                 if type(val[-1]) != str:
                     keyobjs.append(anims[-1])
 
-            self.remove(keystones[0]+1)
-            anims.pop(keystones[0]+1)
-
-            print(durations)
-
             sub = 0
-            for i,anim in enumerate(anims):
+            for i,anim in enumerate(anims[1 if keystones[0] < 0 else 0:]):
                 if i in keystones:
                     sub += 1
                     continue
-                to_wait = max(start_times[i-sub]-tot_dura, 0)
-                self.wait(to_wait)
-                tot_dura += to_wait
+                # to_wait = max(start_times[i-sub]-tot_dura, 0)
+                # self.wait(to_wait)
+                # tot_dura += to_wait
+
                 # self.play(Create(anim, run_time=durations[i-sub]))
                 self.play(Write(anim, run_time=2))
-                tot_dura += durations[i-sub]
+                # tot_dura += durations[i-sub]
 
             # draw
             for obj in onscreen:
