@@ -7,34 +7,35 @@ POEM = [
 #                       \/ text
 [ ( None, 0.5 ), [
     (   1.00, None, 1, "In the beginning," ),
-    (   3.00, None, 1, "it was" ),
-    (   5.00, None, 1, "chaotic." ),
+    (   3.00, None, 1, " it was" ),
+    (   5.00, None, 1, " chaotic." ),
 ]],
 [ ( None, -0.5 ), [
     (   7.00, None, 0, "A stew" ),
-    (   8.00, None, 4, "almost", True ),
-    (   9.00, None, 0, "conscious." ),
+    (   8.00, None, 4, " almost", True ),
+    (   9.00, None, 0, " conscious." ),
 ]],
 [ ( None, 0.5 ), [
-    (   10.50, None, 1, "Perception," ),
-    (   12.00, None, 1, "only of the present." ),
+    (   11.50, None, 1, "Perception," ),
+    (   13.00, None, 1, " only of the present." ),
 ]],
 [ ( None, -0.5 ), [
-    (   15.00, None, 0, "An ape" ),
+    (   16.00, None, 0, "An ape " ),
     None,
-    (   17.00, None, 0, "human." ),
+    (   18.00, None, 0, " human." ),
 ]],
 [ ( None, 0.5 ), [
-    (  18.50, None, 1, "But from the shifting nature came" ),
+    (  19.50, None, 1, "But from the shifting nature came" ),
 ]],
 [ ( None, -0.5 ), [
-    (   23.00, None, 0, "A mind" ),
+    (   24.00, None, 0, "A mind " ),
     None,
-    (   25.00, None, 0, "dauntless." ),
+    (   27.00, None, 0, " dauntless." ),
 ]],
 ]
 
-KEARN_GAP = 0.4
+KEARN_GAP = 0.1
+CHAR_WIDTH = 0.4
 CHAR_HEIGHT = 0.8
 COMMA_HEIGHT = 0.12
 
@@ -68,9 +69,9 @@ class textTest(Scene):
                 keystones = [-1]
                 # x shift
                 if keyopt[0] is None:
-                    keyobj.to_edge(LEFT)
+                    keyobj.to_edge(LEFT).shift([-CHAR_WIDTH, 0, 0])
                 else:
-                    keyobj.shift([KEARN_GAP*keyopt[0], 0, 0])
+                    keyobj.shift([CHAR_WIDTH*keyopt[0], 0, 0])
                 # y shift
                 if keyopt[1] is not None:
                     anims[0].shift([0, CHAR_HEIGHT*keyopt[1], 0])
@@ -90,7 +91,7 @@ class textTest(Scene):
             # construct
             for val, toshift in reversed(before_key):
                 anims.insert(0, Text(val[3], color=WHITE)
-                        .next_to(anims[0], LEFT, buff=KEARN_GAP)
+                        .next_to(anims[0], LEFT, buff=CHAR_WIDTH if val[3][-1] == " " else KEARN_GAP)
                         .align_to(keyobj, DOWN)
                         .shift([0, -COMMA_HEIGHT*toshift, 0]))
                 durations.append(val[1] or default_dura(val[3]))
@@ -103,7 +104,7 @@ class textTest(Scene):
 
             for val, toshift in after_key:
                 anims.append(Text(val[3], color=WHITE)
-                        .next_to(anims[-1], RIGHT, buff=KEARN_GAP)
+                        .next_to(anims[-1], RIGHT, buff=CHAR_WIDTH if val[3][0] == " " else KEARN_GAP)
                         .align_to(keyobj, DOWN)
                         .shift([0, -COMMA_HEIGHT*toshift, 0])
                         )
@@ -118,13 +119,13 @@ class textTest(Scene):
                 if i in keystones:
                     sub += 1
                     continue
-                # to_wait = max(start_times[i-sub]-tot_dura, 0)
-                # self.wait(to_wait)
-                # tot_dura += to_wait
+                to_wait = max(start_times[i-sub]-tot_dura, 0)
+                self.wait(to_wait)
+                tot_dura += to_wait
 
-                # self.play(Create(anim, run_time=durations[i-sub]))
-                self.play(Write(anim, run_time=2))
-                # tot_dura += durations[i-sub]
+                self.play(Write(anim, run_time=durations[i-sub]))
+                # self.play(Write(anim, run_time=2))
+                tot_dura += durations[i-sub]
 
             # draw
             for obj in onscreen:
