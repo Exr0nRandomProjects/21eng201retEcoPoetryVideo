@@ -1,6 +1,7 @@
 from manim import *
 
 config.max_files_cached = 400
+# config.renderer = 'opengl'
 
 POEM = [
 #       \/ begin timestamp
@@ -63,7 +64,7 @@ POEM = [
 [ ( None, 0.5 ), [
     (  27.00  +59/60, None, 1, "A potent concotion," ),
 ]],
-[ ( None, -0.5 ), [
+[ ( None, -0.5, 1.3 ), [
     (  29.00  +20/60, None, 0, "a force none could withstand." ),
 ]],
 
@@ -75,9 +76,9 @@ POEM = [
     (  32.00  +17/60, None, 1, "we said" ),
 ]],
 [ ( -4, -0.8 ), [
-    (  32.00  +48/60,  0.1, 0, '"'),
+    (  32.00  +48/60,  0.02, 0, '"'),
     (  32.00  +48/60, None, 1, 'almost', True),
-    (  32.00  +48/60,  0.1, 0, '"'),
+    (  32.00  +48/60,  0.02, 0, '"'),
 ]],
 [ ( None, -0.8 ), [
     (  34.00  + 0/60, None, 0, '"We are ' ),
@@ -91,7 +92,7 @@ POEM = [
 [ ( 16-33.4, 0 ), [
     (  37.00  +17/60, None, 1, "Trampled each beast and each flower." ),
 ]],
-[ ( 16-30.7, -0.8 ), [
+[ ( 16-30.7, -0.8, 2.1 ), [
     (  39.00  +39/60, None, 0, "Nature did not have the willpower." ),
 ]],
 
@@ -108,7 +109,7 @@ POEM = [
     (  45.00  +56/60, None, 0, "of our light" ),
     (  46.00  +34/60, None, 0, " we realized:" ),
 ]],
-[ ( None, 0 ), [
+[ ( None, 0, 1.2 ), [
     (  47.00  +42/60, None, 0, "We were not satisfied." ),
 ]],
 
@@ -141,9 +142,9 @@ POEM = [
     (  59.00  +40/60, None, 1, "we said" ),
 ]],
 [ ( -4, -0.8 ), [
-    (  60.00  + 9/60,  0.1, 0, '"'),
+    (  60.00  + 9/60,  0.02, 0, '"'),
     (  60.00  + 9/60, None, 1, 'almost', True),
-    (  60.00  + 9/60,  0.1, 0, '"'),
+    (  60.00  + 9/60,  0.02, 0, '"'),
 ]],
 [ ( None, -0.8 ), [
     (  61.00  +34/60, None, 0, '"We are ' ),
@@ -157,7 +158,7 @@ POEM = [
 [ ( -4.65, 0 ), [
     (  65.00  + 7/60, None, 1, "counted kilowatt hours." ),
 ]],
-[ ( 15-30.7, -0.8 ), [
+[ ( 15-30.7, -0.8, 2.1 ), [
     (  67.00  +10/60, None, 0, "Nature did not have the willpower." ),
 ]],
 
@@ -196,7 +197,7 @@ POEM = [
 [ ( None, 0.5 ), [
     (  82.00  +57/60, None, 1, "endlessly updated" ),
 ]],
-[ ( None, -0.5 ), [
+[ ( None, -0.5, 1.5 ), [
     (  83.00  +54/60, None, 0, "our taxonomy of anomalies." ),
 ]],
 
@@ -207,9 +208,9 @@ POEM = [
     (  86.00  +43/60, None, 1, "we said" ),
 ]],
 [ ( -4, -0.8 ), [
-    (  87.00  +10/60,  0.1, 0, '"'),
+    (  87.00  +10/60,  0.02, 0, '"'),
     (  87.00  +10/60, None, 1, 'almost', True),
-    (  87.00  +10/60,  0.1, 0, '"'),
+    (  87.00  +10/60,  0.02, 0, '"'),
 ]],
 [ ( None, -0.8 ), [
     (  88.00  +14/60, None, 0, '"We are ' ),
@@ -226,7 +227,7 @@ POEM = [
 [ ( None, -0.8 ), [
     (  93.00  +42/60, None, 3, "We", True ),
 ]],
-[ ( 15-24.05, -0.8 ), [
+[ ( 15-24.05, -0.8, 1.7 ), [
     (  94.00  +17/60, None, 0, "did not have the willpower." ),
 ]],
 
@@ -247,7 +248,7 @@ POEM = [
 ]],
 [ ( None, 0 ), [
     ( 102.00  +39/60, None, 1, "We are the parasite" ),
-    ( 104.00  + 0/60, None, 1, "." ),
+    ( 105.00  +30/60, None, 1, "." ),
 ]],
 ]
 
@@ -266,7 +267,7 @@ def is_shifted(s):
     return 0
 
 def default_dura(s):
-    return len(s)/26
+    return len(s)/30
 
 class textTest(Scene):
     def construct(self):
@@ -364,11 +365,15 @@ class textTest(Scene):
                 obj[0] -= 1
             keyobjs = [ obj for obj in keyobjs if obj[0] >= 0 ]
 
-        print(onscreen)
-        print('TOTAL DURATION:', tot_dura)
-
         self.wait(1)
         if len(onscreen):
             self.play(*[FadeOut(obj[1]) for obj in onscreen], run_time = 7)
-        self.wait(2)
+            tot_dura += 7
+        self.wait(1.5)
+        print('TOTAL DURATION:', tot_dura+3)
+
+        endcard = Text("<NAME> | NUS English 201 | 10 June 2021", color='#326CCC').scale(0.5).to_edge(RIGHT).to_edge(DOWN)
+        self.play(FadeIn(endcard), run_time = 0.5)
+        self.wait(3.4)
+        self.play(FadeOut(endcard), run_time = 0.5)
 
