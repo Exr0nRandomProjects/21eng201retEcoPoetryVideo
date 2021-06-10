@@ -5,32 +5,253 @@ POEM = [
 #             \/ duration, None = (until next - 0.5)
 #                   \/ onscreen length (number of lines remaining to stay onscreen)
 #                       \/ text
-[ ( None, 0.5 ), [
-    (   1.00, None, 1, "In the beginning," ),
-    (   3.00, None, 1, " it was" ),
-    (   5.00, None, 1, " chaotic." ),
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "In the beginning," ),
+#     (   1.00  +16/60, None, 1, " it was" ),
+#     (   1.00  +47/60, None, 1, " chaotic." ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   2.00  +42/60, None, 0, "A stew" ),
+#     (   8.00  +16/60, None, 4, " almost", True ),
+#     (   9.00  +16/60, None, 0, " conscious." ),
+# ]],
+# [ ( None, 0.5 ), [
+#     (   11.50  +16/60, None, 1, "Perception," ),
+#     (   13.00  +16/60, None, 1, " only of the present." ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   16.00  +16/60, None, 0, "An ape " ),
+#     None,
+#     (   18.00  +16/60, None, 0, " human." ),
+# ]],
+# [ ( None, 0.5 ), [
+#     (  19.50  +16/60, None, 1, "But from the shifting nature came" ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   24.00  +16/60, None, 0, "A mind " ),
+#     None,
+#     (   27.00  +16/60, None, 0, " dauntless." ),
+# ]],
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "Until finally, we escaped" ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "the intellectual shade:" ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "we became nature's renegades." ),
+# ]],
+
+
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "When we gained maturity," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "we sought security." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "We harnessed oxen," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "and cultivated the land." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "A potent concotion," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "a force none could withstand." ),
+# ]],
+#
+# # [ ( -14, 0.7 ), [
+# #     (   0.00  +16/60, None, 2, "And yet" ),
+# # ]],
+# # [ ( -4, 0 ), [
+# #     (   0.00  +16/60, None, 1, "we said" ),
+# # ]],
+# # [ ( 7, -0.7 ), [
+# #     (   0.00  +16/60, None, 0, '"almost."' ),
+# # ]],
+# [ ( -4, 0.8 ), [
+#     (   0.00  +16/60, None, 2, "And yet" ),
+# ]],
+# [ ( -4, 0 ), [
+#     (   0.00  +16/60, None, 1, "we said" ),
+# ]],
+# [ ( -4, -0.8 ), [
+#     (   0.00  +16/60,  0.1, 0, '"'),
+#     (   0.00  +16/60, None, 1, 'almost', True),
+#     (   0.00  +16/60,  0.1, 0, '"'),
+# ]],
+# [ ( None, -0.8 ), [
+#     (   0.00  +16/60, None, 0, '"We are ' ),
+#     None,
+#     (   0.00  +16/60, None, 0, ' safe."' ),
+# ]],
+#
+# [ ( 16-20, 0.8 ), [
+#     (   0.00  +16/60, None, 2, "We created gunpowder," ),
+# ]],
+# [ ( 16-33.4, 0 ), [
+#     (   0.00  +16/60, None, 1, "Trampled each beast and each flower." ),
+# ]],
+# [ ( 16-30.7, -0.8 ), [
+#     (   0.00  +16/60, None, 0, "Nature did not have the willpower." ),
+# ]],
+#
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We were safe." ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We did it right." ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 1, "But in the height" ),
+# ]],
+# [ ( -12.6, -0.8 ), [
+#     (   0.00  +16/60, None, 0, "of our light" ),
+#     (   0.00  +16/60, None, 0, " we realized:" ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We were not satisfied." ),
+# ]],
+
+
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "When we gained security," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "we sought prosperity." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "We invented machines," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "and harnessed the lightning." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "We created vaccines," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "and used bleach for whitening." ),
+# ]],
+#
+# [ ( -4, 0.8 ), [
+#     (   0.00  +16/60, None, 2, "And yet" ),
+# ]],
+# [ ( -4, 0 ), [
+#     (   0.00  +16/60, None, 1, "we said" ),
+# ]],
+# [ ( -4, -0.8 ), [
+#     (   0.00  +16/60,  0.1, 0, '"'),
+#     (   0.00  +16/60, None, 1, 'almost', True),
+#     (   0.00  +16/60,  0.1, 0, '"'),
+# ]],
+# [ ( None, -0.8 ), [
+#     (   0.00  +16/60, None, 0, '"We are ' ),
+#     None,
+#     (   0.00  +16/60, None, 0, ' snug."' ),
+# ]],
+#
+# [ ( -3.8, 0.8 ), [
+#     (   0.00  +16/60, None, 2, "We built ivory towers," ),
+# ]],
+# [ ( -4.65, 0 ), [
+#     (   0.00  +16/60, None, 1, "counted kilowatt hours." ),
+# ]],
+# [ ( 15-30.7, -0.8 ), [
+#     (   0.00  +16/60, None, 0, "Nature did not have the willpower." ),
+# ]],
+#
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We were snug." ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We did it right." ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 1, "But in the height" ),
+# ]],
+# [ ( -12.6, -0.8 ), [
+#     (   0.00  +16/60, None, 0, "of our light" ),
+#     (   0.00  +16/60, None, 0, " we realized:" ),
+# ]],
+# [ ( None, 0 ), [
+#     (   0.00  +16/60, None, 0, "We were not satisfied." ),
+# ]],
+
+
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "When we gained prosperity," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "we fought insecurity." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "We wrote deuteronomy," ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "managed the economy." ),
+# ]],
+#
+# [ ( None, 0.5 ), [
+#     (   0.00  +16/60, None, 1, "endlessly updated" ),
+# ]],
+# [ ( None, -0.5 ), [
+#     (   0.00  +16/60, None, 0, "our taxonomy of anomalies." ),
+# ]],
+#
+# [ ( -4, 0.8 ), [
+#     (   0.00  +16/60, None, 2, "And yet" ),
+# ]],
+# [ ( -4, 0 ), [
+#     (   0.00  +16/60, None, 1, "we said" ),
+# ]],
+# [ ( -4, -0.8 ), [
+#     (   0.00  +16/60,  0.1, 0, '"'),
+#     (   0.00  +16/60, None, 1, 'almost', True),
+#     (   0.00  +16/60,  0.1, 0, '"'),
+# ]],
+# [ ( None, -0.8 ), [
+#     (   0.00  +16/60, None, 0, '"We are ' ),
+#     None,
+#     (   0.00  +16/60, None, 0, ' happy."' ),
+# ]],
+
+[ ( -3, 0.8 ), [
+    (   0.00  +16/60, None, 3, "We sat in rush hour," ),
 ]],
-[ ( None, -0.5 ), [
-    (   7.00, None, 0, "A stew" ),
-    (   8.00, None, 4, " almost", True ),
-    (   9.00, None, 0, " conscious." ),
+[ ( -5.65, 0 ), [
+    (   0.00  +16/60, None, 2, "ignored meteor showers." ),
 ]],
-[ ( None, 0.5 ), [
-    (   11.50, None, 1, "Perception," ),
-    (   13.00, None, 1, " only of the present." ),
+[ ( None, -0.8 ), [
+    (   0.00  +16/60, None, 3, "We", True ),
 ]],
-[ ( None, -0.5 ), [
-    (   16.00, None, 0, "An ape " ),
+[ ( 15-24.05, -0.8 ), [
+    (   0.00  +16/60, None, 0, "did not have the willpower." ),
+]],
+
+[ ( None, 0 ), [
     None,
-    (   18.00, None, 0, " human." ),
+    (   0.00  +16/60, None, 0, " were snug." ),
 ]],
-[ ( None, 0.5 ), [
-    (  19.50, None, 1, "But from the shifting nature came" ),
-]],
-[ ( None, -0.5 ), [
-    (   24.00, None, 0, "A mind " ),
+[ ( None, 0 ), [
     None,
-    (   27.00, None, 0, " dauntless." ),
+    (   0.00  +16/60, None, 0, " did it right." ),
+]],
+[ ( None, 0 ), [
+    (   0.00  +16/60, None, 1, "But in the height" ),
+]],
+[ ( -12.6, -0.8 ), [
+    (   0.00  +16/60, None, 0, "of our light" ),
+    (   0.00  +16/60, None, 0, " we realized:" ),
+]],
+[ ( None, 0 ), [
+    (   0.00  +16/60, None, 1, "We are the parasite." ),
 ]],
 ]
 
@@ -38,15 +259,18 @@ KEARN_GAP = 0.1
 CHAR_WIDTH = 0.4
 CHAR_HEIGHT = 0.8
 COMMA_HEIGHT = 0.12
+QUOTE_HEIGHT = 0.3
 
 def is_shifted(s):
     for char in ',;yqpjg':
         if char in s:
-            return True
-    return False
+            return -COMMA_HEIGHT
+    if len(s) == 1 and s in '"\'':
+        return QUOTE_HEIGHT
+    return 0
 
 def default_dura(s):
-    return len(s)/6
+    return len(s)/26
 
 class textTest(Scene):
     def construct(self):
@@ -56,12 +280,12 @@ class textTest(Scene):
 
         for keyopt, line in POEM:
             # calculate edge cases
-            yoffset = [ int(is_shifted(val[3])) if val is not None else 0 for val in line ]
+            yoffset = [ is_shifted(val[3]) if val is not None else 0 for val in line ]
             keystones = [ i for i,val in enumerate(line) if val is None ]
 
             # create the base
             if len(keystones) > 0:
-                anims = [ obj for obj in keyobjs ]
+                anims = [ obj[1] for obj in keyobjs ]
                 keyobj = anims[0]
             else:
                 anims = [Text("e", color=BLUE)]
@@ -83,8 +307,6 @@ class textTest(Scene):
                 before_key = list(zip(line, yoffset))[:keystones[0]]
             after_key  = list(zip(line, yoffset))[keystones[0]+1:]
 
-            print(before_key, after_key)
-
             durations = []
             start_times = []
 
@@ -93,12 +315,12 @@ class textTest(Scene):
                 anims.insert(0, Text(val[3], color=WHITE)
                         .next_to(anims[0], LEFT, buff=CHAR_WIDTH if val[3][-1] == " " else KEARN_GAP)
                         .align_to(keyobj, DOWN)
-                        .shift([0, -COMMA_HEIGHT*toshift, 0]))
+                        .shift([0, toshift, 0]))
                 durations.append(val[1] or default_dura(val[3]))
                 start_times.append(val[0])
                 onscreen.insert(0, [val[2], anims[0]])
                 if type(val[-1]) != str:
-                    keyobjs.insert(0, anims[0])
+                    keyobjs.insert(0, [val[2], anims[0]])
 
             print('anims', anims)
 
@@ -106,13 +328,13 @@ class textTest(Scene):
                 anims.append(Text(val[3], color=WHITE)
                         .next_to(anims[-1], RIGHT, buff=CHAR_WIDTH if val[3][0] == " " else KEARN_GAP)
                         .align_to(keyobj, DOWN)
-                        .shift([0, -COMMA_HEIGHT*toshift, 0])
+                        .shift([0, toshift, 0])
                         )
                 durations.append(val[1] or default_dura(val[3]))
                 start_times.append(val[0])
                 onscreen.append([val[2], anims[-1]])
                 if type(val[-1]) != str:
-                    keyobjs.append(anims[-1])
+                    keyobjs.append([val[2], anims[-1]])
 
             sub = 0
             for i,anim in enumerate(anims[1 if keystones[0] < 0 else 0:]):
@@ -138,5 +360,16 @@ class textTest(Scene):
             except ValueError:
                 pass
             onscreen = [ obj for obj in onscreen if obj[0] >= 0 ]
+
+            # also remove things from keyobjs, this is sooo undry
+            for obj in keyobjs:
+                obj[0] -= 1
+            keyobjs = [ obj for obj in keyobjs if obj[0] >= 0 ]
+
+        print(onscreen)
         print('TOTAL DURATION:', tot_dura)
+
+        self.wait(3)
+        self.play(*[FadeOut(obj[1]) for obj in onscreen], run_time = 6)
+        self.wait(2)
 
